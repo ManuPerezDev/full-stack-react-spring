@@ -4,8 +4,10 @@ import SecondComponent from './components/learning-examples/SecondComponent';
 import ThirdComponent from './components/learning-examples/ThirdComponent';
 import FourthComponent from './components/learning-examples/FourthComponent';
 import Counter from "./components/counter/CounterButton";
+import TodoApp from "./components/todo/TodoApp";
 
 import './App.css';
+import './bootstrap.css';
 
 class App extends Component {
   render() {
@@ -13,6 +15,7 @@ class App extends Component {
 
       <div className="App">
         <Counter/>
+        {/*<TodoApp></TodoApp>*/}
       </div>
     );
   }
