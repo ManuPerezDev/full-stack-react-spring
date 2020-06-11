@@ -14,8 +14,8 @@ class App extends Component {
     return (
 
       <div className="App">
-        <Counter/>
-        {/*<TodoApp></TodoApp>*/}
+        {/*<Counter/>*/}
+        <TodoApp></TodoApp>
       </div>
     );
   }
