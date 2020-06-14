@@ -39,6 +39,7 @@
 /restful-web-services/.sts4-cache
 
 ### IntelliJ IDEA ###
+.idea
 /restful-web-services/.idea
 /restful-web-services/*.iws
 /restful-web-services/*.iml
