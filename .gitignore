@@ -12,12 +12,34 @@
 /frontend/build
 
 # misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+/frontend/.DS_Store
+/frontend/.env.local
+/frontend/.env.development.local
+/frontend/.env.test.local
+/frontend/.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+#Back-end
+/restful-web-services/HELP.md
+/restful-web-services/target/
+/restful-web-services/!.mvn/wrapper/maven-wrapper.jar
+/restful-web-services/!**/src/main/**
+/restful-web-services/!**/src/test/**
+
+### STS ###
+/restful-web-services/.apt_generated
+/restful-web-services/.classpath
+/restful-web-services/.factorypath
+/restful-web-services/.project
+/restful-web-services/.settings
+/restful-web-services/.springBeans
+/restful-web-services/.sts4-cache
+
+### IntelliJ IDEA ###
+/restful-web-services/.idea
+/restful-web-services/*.iws
+/restful-web-services/*.iml
+/restful-web-services/*.ipr
