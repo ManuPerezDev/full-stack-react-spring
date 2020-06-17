@@ -41,7 +41,6 @@ export default class WelcomeComponent extends Component{
 
         HelloWorldService.executeHelloWorldPathVariableService(this.props.match.params.name).
         then(response => this.handleSuccessfulResponse(response))
-            .catch(error => this.handleErrorResponse(error))
 
     }
 
