@@ -7,6 +7,7 @@ export default class WelcomeComponent extends Component{
         super();
         this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this);
         this.handleSuccessfulResponse = this.handleSuccessfulResponse.bind(this);
+        this.handleErrorResponse = this.handleErrorResponse.bind(this);
         this.state = {
             welcomeMessage : ''
         }
@@ -40,10 +41,15 @@ export default class WelcomeComponent extends Component{
 
         HelloWorldService.executeHelloWorldPathVariableService(this.props.match.params.name).
         then(response => this.handleSuccessfulResponse(response))
+            .catch(error => this.handleErrorResponse(error))
 
     }
 
     handleSuccessfulResponse(response){
         this.setState({welcomeMessage: response.data.message})
+    }
+
+    handleErrorResponse(error){
+        this.setState({welcomeMessage: error.response.data.message})
     }
 }
