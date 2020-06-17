@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import '../counter/Counter.css';
 
 export default class FooterComponent extends Component{
     render() {
