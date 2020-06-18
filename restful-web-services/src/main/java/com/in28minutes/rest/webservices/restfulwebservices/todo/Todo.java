@@ -6,15 +6,16 @@ public class Todo {
     private long id;
     private String username;
     private String description;
+    private boolean isDone;
     private Date targetDate;
-    private boolean idDone;
 
-    public Todo(long id, String username, String description, Date targetDate, boolean idDone) {
+
+    public Todo(long id, String username, String description, boolean isDone, Date targetDate) {
         this.id = id;
         this.username = username;
         this.description = description;
+        this.isDone = isDone;
         this.targetDate = targetDate;
-        this.idDone = idDone;
     }
 
     public long getId() {
@@ -49,11 +50,11 @@ public class Todo {
         this.targetDate = targetDate;
     }
 
-    public boolean isIdDone() {
-        return idDone;
+    public boolean isDone() {
+        return isDone;
     }
 
-    public void setIdDone(boolean idDone) {
-        this.idDone = idDone;
+    public void setDone(boolean done) {
+        this.isDone = done;
     }
 }
