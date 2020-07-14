@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
 import java.net.URI;
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class TodoResource {
     public ResponseEntity<Todo> updateTodo(@PathVariable String username,
                                            @PathVariable long id,
                                            @RequestBody Todo todo){
-        Todo todoUpdated = todoService.save(todo);
-        return new ResponseEntity<Todo>(todo, HttpStatus.OK);
+        todoService.save(todo);
+        return new ResponseEntity<>(todo, HttpStatus.OK);
     }
 
     @PostMapping("/users/{username}/todos")
