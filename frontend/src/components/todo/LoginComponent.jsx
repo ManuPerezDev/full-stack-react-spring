@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import AuthenticationService from "./AuthenticationService";
+import AuthenticationService from "../../api/todo/AuthenticationService";
 
 export default class LoginComponent extends Component{
     constructor(props) {
@@ -22,13 +22,21 @@ export default class LoginComponent extends Component{
     }
 
     loginClicked(){
-        if (this.state.username === 'admin' && this.state.password === 'admin'){
-            AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
-            this.props.history.push(`/welcome/${this.state.username}`)
-        }
-        else{
-            this.setState({hasLoginFailed: true, showSuccessMessage: false})
-        }
+        AuthenticationService
+            .executeBasicAuthenticationService(this.state.username, this.state.password)
+            .then(
+                () => {
+                    AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+                    this.props.history.push(`/welcome/${this.state.username}`)
+                }
+            ).catch(
+                () => {
+                    this.setState({
+                        hasLoginFailed: true,
+                        showSuccessMessage: false
+                    })
+                }
+            )
     }
 
     render() {

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import AuthenticationService from "./AuthenticationService";
+import AuthenticationService from "../../api/todo/AuthenticationService";
 import {Link} from "react-router-dom";
 import { withRouter } from 'react-router';
 
