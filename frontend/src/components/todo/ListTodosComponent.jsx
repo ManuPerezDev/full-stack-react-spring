@@ -75,8 +75,8 @@ export default class ListTodosComponent extends Component{
                                     <tr key={todo.id}>
                                         <td>{todo.id}</td>
                                         <td>{todo.description}</td>
-                                        <td>{todo.done.toString()}</td>
                                         <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
+                                        <td>{todo.done.toString()}</td>
                                         <td><button className="btn btn-success" onClick={() => this.updateTodoCLicked(todo.id)}>Update</button></td>
                                         <td><button className="btn btn-warning" onClick={() => this.deleteTodoCLicked(todo.id)}>Delete</button></td>
                                     </tr>

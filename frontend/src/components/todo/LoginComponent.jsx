@@ -22,21 +22,34 @@ export default class LoginComponent extends Component{
     }
 
     loginClicked(){
+        // AuthenticationService
+        //     .executeBasicAuthenticationService(this.state.username, this.state.password)
+        //     .then(
+        //         () => {
+        //             AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+        //             this.props.history.push(`/welcome/${this.state.username}`)
+        //         }
+        //     ).catch(
+        //         () => {
+        //             this.setState({
+        //                 hasLoginFailed: true,
+        //                 showSuccessMessage: false
+        //             })
+        //         }
+        //     )
+
         AuthenticationService
-            .executeBasicAuthenticationService(this.state.username, this.state.password)
-            .then(
-                () => {
-                    AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+            .executeJwtAuthenticationService(this.state.username, this.state.password)
+            .then((response) => {
+                    AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
                     this.props.history.push(`/welcome/${this.state.username}`)
-                }
-            ).catch(
-                () => {
-                    this.setState({
-                        hasLoginFailed: true,
-                        showSuccessMessage: false
-                    })
-                }
-            )
+                }).catch(() => {
+                this.setState({
+                    hasLoginFailed: true,
+                    showSuccessMessage: false
+                })
+            }
+        )
     }
 
     render() {
