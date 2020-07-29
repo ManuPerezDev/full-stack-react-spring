@@ -16,7 +16,7 @@ export default function WelcomeComponent(){
                 </div>
                 <div className="container">
                     Click here to get a customized welcome message.
-                    <button onClick={retrieveWelcomeMessage()} className="btn btn-success">Get Welcome Message</button>
+                    <button onClick={retrieveWelcomeMessage} className="btn btn-success">Get Welcome Message</button>
                 </div>
                 <div className="container">
                     {welcomeMessage}
@@ -24,15 +24,8 @@ export default function WelcomeComponent(){
             </>
     );
 
-
-
     function retrieveWelcomeMessage(){
         HelloWorldService.executeHelloWorldPathVariableService(name).
-        then(response => handleSuccessfulResponse(response))
-
-    }
-
-    function handleSuccessfulResponse(response){
-        setWelcomeMessage(response.data.message)
+            then(response => setWelcomeMessage(response.data.message))
     }
 }

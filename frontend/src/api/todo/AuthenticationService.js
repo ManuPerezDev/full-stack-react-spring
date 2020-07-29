@@ -5,13 +5,6 @@ export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 
 export default function AuthenticationService(){
 
-    function executeBasicAuthenticationService(username, password){
-        return axios.get(`${API_URL}/basicauth`, {
-            headers: {
-                authorization: createBasicAuthToken(username, password)
-            }
-        })
-    }
     function executeJwtAuthenticationService(username, password){
         return axios.post(`${API_URL}/authenticate`, {
                 username,
@@ -25,11 +18,6 @@ export default function AuthenticationService(){
 
     function createJwtToken(token){
         return 'Bearer ' + token
-    }
-
-    function registerSuccessfulLogin(username, password){
-        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
-        setupAxiosInterceptors(createBasicAuthToken(username, password))
     }
 
     function registerSuccessfulLoginForJwt(username, token){

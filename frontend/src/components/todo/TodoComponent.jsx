@@ -67,7 +67,7 @@ export default function TodoComponent (props){
                     enableReinitialize={true}
                 >
                     {
-                        (props) =>(
+                        (
                             <Form>
                                 <ErrorMessage name="description" component="div" className="alert alert-warning"/>
                                 <ErrorMessage name="targetDate" component="div" className="alert alert-warning"/>
