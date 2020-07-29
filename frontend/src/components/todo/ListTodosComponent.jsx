@@ -8,8 +8,9 @@ export default function ListTodosComponent (props){
     const [message, setMessage] = useState(null)
 
     useEffect(() => {
+        console.log("LLLOOOOPPPPP")
         refreshTodos()
-    })
+    }, [])
 
     function refreshTodos() {
         let username = AuthenticationService().getLoggedInUsername()
@@ -21,7 +22,7 @@ export default function ListTodosComponent (props){
         let username = AuthenticationService().getLoggedInUsername()
         TodoDataService().deleteTodo(username, id)
             .then(response => {
-                    setMessage(`Delete of todo ${id} succesful`)
+                    setMessage(`Delete of todo ${id} successful`)
                     refreshTodos()
                 }
             )
@@ -45,16 +46,15 @@ export default function ListTodosComponent (props){
                     <tr>
                         <th>Id</th>
                         <th>Description</th>
-                        <th>Is completed?</th>
                         <th>Target date</th>
+                        <th>Is completed?</th>
                         <th>Update</th>
                         <th>Delete</th>
                     </tr>
                     </thead>
                     <tbody>
                     {
-                        todos.map(
-                            todo =>
+                        todos.map(todo =>
                                 <tr key={todo.id}>
                                     <td>{todo.id}</td>
                                     <td>{todo.description}</td>

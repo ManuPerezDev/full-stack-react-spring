@@ -12,10 +12,6 @@ export default function AuthenticationService(){
         })
     }
 
-    function createBasicAuthToken(username, password){
-        return 'Basic ' + window.btoa(username + ':' + password)
-    }
-
     function createJwtToken(token){
         return 'Bearer ' + token
     }
@@ -25,7 +21,6 @@ export default function AuthenticationService(){
         setupAxiosInterceptors(createJwtToken(token))
 
     }
-
 
     function logout(){
         sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
