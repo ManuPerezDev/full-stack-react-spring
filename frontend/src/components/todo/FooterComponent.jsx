@@ -1,12 +1,10 @@
-import React, {Component} from "react";
+import React from "react";
 import '../counter/Counter.css';
 
-export default class FooterComponent extends Component{
-    render() {
+export default function FooterComponent (){
         return(
             <footer className="footer">
                 <span className="text-muted">All rights reserved 2020</span>
             </footer>
         )
-    }
 }

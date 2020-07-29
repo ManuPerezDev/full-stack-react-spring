@@ -1,36 +1,28 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
 import moment from "moment";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import TodoDataService from "../../api/todo/TodoDataService";
 import AuthenticationService from "../../api/todo/AuthenticationService";
 
-class TodoComponent extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            id : this.props.match.params.id,
-            description : '',
-            targetDate : moment(new Date()).format('YYYY-MM-DD')
-        }
+export default function TodoComponent (props){
+    const [id] = useState(props.match.params.id)
+    const [description, setDescription] = useState('')
+    const [targetDate, setTargetDate] = useState(moment(new Date()).format('YYYY-MM-DD'))
 
-        this.onSubmit = this.onSubmit.bind(this)
-        this.validate = this.validate.bind(this)
-    }
-
-    componentDidMount() {
-        if(this.state.id === -1){
+    useEffect(() => {
+        if(id === -1){
             return
         }
-        let username = AuthenticationService.getLoggedInUsername()
-        TodoDataService.retrieveTodo(username, this.state.id)
-            .then(response => this.setState({
-                    description: response.data.description,
-                    targetDate: moment(response.data.targetDate).format('YYYY-MM-DD')
+        let username = AuthenticationService().getLoggedInUsername()
+        TodoDataService().retrieveTodo(username, id)
+            .then(response => {
+                    setDescription(response.data.description)
+                    setTargetDate(moment(response.data.targetDate).format('YYYY-MM-DD'))
                 }
-            ))
-    }
+            )
+    })
 
-    validate(values){
+    function validate(values){
         let errors = {}
         if(!values.description){
             errors.description = 'Enter a Description'
@@ -44,60 +36,56 @@ class TodoComponent extends Component{
         return errors
     }
 
-    onSubmit(values) {
-        let username = AuthenticationService.getLoggedInUsername()
+    function onSubmit(values) {
+        let username = AuthenticationService().getLoggedInUsername()
         let todo = {
-            id: this.state.id,
+            id: id,
             description: values.description,
             targetDate: values.targetDate
         }
 
-        if(this.state.id === -1){
-            TodoDataService.createTodo(username, todo).then(
-                () => this.props.history.push('/todos')
+        if(id === -1){
+            TodoDataService().createTodo(username, todo).then(
+                () => props.history.push('/todos')
             )
         }else {
-            TodoDataService.updateTodo(username, this.state.id,todo).then(
-                () => this.props.history.push('/todos')
+            TodoDataService().updateTodo(username, id,todo).then(
+                () => props.history.push('/todos')
             )
         }
     }
 
-    render() {
-        let {description, targetDate} = this.state
 
-        return(
-            <div>
-                <h1>Todo</h1>
-                <div className="container">
-                    <Formik
-                        initialValues={{description, targetDate}}
-                        onSubmit={this.onSubmit}
-                        validate={this.validate}
-                        enableReinitialize={true}
-                    >
-                        {
-                            (props) =>(
-                                <Form>
-                                    <ErrorMessage name="description" component="div" className="alert alert-warning"/>
-                                    <ErrorMessage name="targetDate" component="div" className="alert alert-warning"/>
-                                    <fieldset className="form-group">
-                                        <label>Description</label>
-                                        <Field className="form-control" type="text" name="description"/>
-                                    </fieldset>
-                                    <fieldset className="form-group">
-                                        <label>Target Date</label>
-                                        <Field className="form-control" type="date" name="targetDate"/>
-                                    </fieldset>
-                                    <button className="btn btn-success" type="submit">Save</button>
-                                </Form>
-                            )
-                        }
-                    </Formik>
-                </div>
+    return(
+        <div>
+            <h1>Todo</h1>
+            <div className="container">
+                <Formik
+                    initialValues={{description, targetDate}}
+                    onSubmit={onSubmit}
+                    validate={validate}
+                    enableReinitialize={true}
+                >
+                    {
+                        (props) =>(
+                            <Form>
+                                <ErrorMessage name="description" component="div" className="alert alert-warning"/>
+                                <ErrorMessage name="targetDate" component="div" className="alert alert-warning"/>
+                                <fieldset className="form-group">
+                                    <label>Description</label>
+                                    <Field className="form-control" type="text" name="description"/>
+                                </fieldset>
+                                <fieldset className="form-group">
+                                    <label>Target Date</label>
+                                    <Field className="form-control" type="date" name="targetDate"/>
+                                </fieldset>
+                                <button className="btn btn-success" type="submit">Save</button>
+                            </Form>
+                        )
+                    }
+                </Formik>
             </div>
-        )
-    }
-}
+        </div>
+    )
 
-export default TodoComponent
+}

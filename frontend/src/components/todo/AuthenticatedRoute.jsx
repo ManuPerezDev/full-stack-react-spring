@@ -1,13 +1,11 @@
-import React, {Component} from "react";
+import React from "react";
 import {Route, Redirect} from 'react-router-dom';
 import AuthenticationService from "../../api/todo/AuthenticationService.js";
 
-export default class AuthenticatedRoute extends Component{
-    render() {
-        if(AuthenticationService.isUserLoggedIn()){
-            return <Route {...this.props}/>
+export default function AuthenticatedRoute (props){
+        if(AuthenticationService().isUserLoggedIn()){
+            return <Route {...props}/>
         }else{
             return <Redirect to="/login"/>
         }
-    }
 }

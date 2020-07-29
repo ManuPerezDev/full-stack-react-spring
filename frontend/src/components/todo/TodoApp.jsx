@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import LoginComponent from "./LoginComponent";
@@ -9,8 +9,7 @@ import FooterComponent from "./FooterComponent";
 import LogoutComponent from "./LogoutComponent";
 import TodoComponent from "./TodoComponent";
 
-class TodoApp extends Component{
-    render() {
+function TodoApp(){
         return(
             <div className="TodoApp">
                 <Router>
@@ -30,11 +29,10 @@ class TodoApp extends Component{
                 </Router>
             </div>
         )
-    }
 }
 
 function ErrorComponent() {
-    return <div>An Error Ocurred.</div>
+    return <div>An Error Occurred.</div>
 }
 
 export default TodoApp;
